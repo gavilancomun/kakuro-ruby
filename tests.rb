@@ -7,6 +7,10 @@ def println (*args)
   puts
 end
 
+def cellEquals(c1, c2)
+  c1.equals(c2)
+end
+
 class TestDrawRow < Test::Unit::TestCase
  
   def test_DrawRow
@@ -103,3 +107,14 @@ class TestPartN < Test::Unit::TestCase
   end
 end
 
+class TestSolveStep < Test::Unit::TestCase
+
+def test_solvestep
+  result = solveStep([v(1, 2), v()], 5)
+  print "solve step result "
+  println result
+  assert(cellEquals(v(1, 2), result[0]))
+  assert(cellEquals(v(3, 4), result[1]))
+end
+
+end

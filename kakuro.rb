@@ -15,7 +15,7 @@ class DownAcrossCell
     "DownAcrossCell[" + @down + ", " + @across + "]"
   end
 
-  def  equals(obj)
+  def equals(obj)
     if (this == obj)
       return true
     end
@@ -41,7 +41,7 @@ class AcrossCell
     "AcrossCell[" + @across + "]"
   end
 
-  def  equals(obj)
+  def equals(obj)
     if (this == obj)
       return true
     end
@@ -67,7 +67,7 @@ class DownCell
     "DownCell[" + @down + "]"
   end
 
-  def  equals(obj)
+  def equals(obj)
     if (this == obj)
       return true
     end
@@ -97,11 +97,25 @@ class ValueCell
     end
   end
 
+  def to_s
+    "ValueCell[" + @values.join(", ") + "]"
+  end
+
+  def equals(obj)
+    if !obj.instance_of? ValueCell
+      return false
+    end
+    Set.new(@values) == Set.new(obj.values)
+  end
 end
 
 class EmptyCell
   def draw
     "   -----  "
+  end
+
+  def equals(obj)
+    obj.instance_of? EmptyCell
   end
 end
 
@@ -192,4 +206,21 @@ end
 def partitionN (n, coll)
   partitionAll(n, n, coll)
 end
+
+def last(coll)
+  coll[coll.length - 1]
+end
+
+def isPossible(v, n)
+  v.values.any? {|item| item == n}
+end
+
+def solveStep(cells, total)
+  finalIndex = cells.length - 1
+  perms = permuteAll(cells, total)
+    .find_all {|v| isPossible(last(cells), v[finalIndex])}
+    .find_all {|v| allDifferent(v)}
+  transpose(perms).map {|coll| v(*coll)}
+end
+
 
