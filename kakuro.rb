@@ -16,7 +16,7 @@ class DownAcrossCell
   end
 
   def equals(obj)
-    if (this == obj)
+    if (self == obj)
       return true
     end
     if (obj == nil)
@@ -42,7 +42,7 @@ class AcrossCell
   end
 
   def equals(obj)
-    if (this == obj)
+    if (self == obj)
       return true
     end
     if (obj == nil)
@@ -68,7 +68,7 @@ class DownCell
   end
 
   def equals(obj)
-    if (this == obj)
+    if (self == obj)
       return true
     end
     if (obj == nil)
@@ -223,4 +223,12 @@ def solveStep(cells, total)
   transpose(perms).map {|coll| v(*coll)}
 end
 
+# returns (non-vals, vals)*
+def gatherValues(line)
+  partitionBy(->(v) {v.instance_of? ValueCell}, line)
+end
+
+def pairTargetsWithValues(line)
+  partitionN(2, gatherValues(line))
+end
 

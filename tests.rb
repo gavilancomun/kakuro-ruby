@@ -116,5 +116,34 @@ def test_solvestep
   assert(cellEquals(v(1, 2), result[0]))
   assert(cellEquals(v(3, 4), result[1]))
 end
-
 end
+
+
+class TestGatherValues < Test::Unit::TestCase
+def test_gather
+  line = [da(3, 4), v(), v(), d(4), e(), a(4), v(), v()]
+  result = gatherValues(line)
+  print "gather "
+  println result
+  assert_equal(4, result.length);
+  assert(cellEquals(da(3, 4), result[0][0]))
+  assert(cellEquals(d(4), result[2][0]))
+  assert(cellEquals(e(), result[2][1]))
+  assert(cellEquals(a(4), result[2][2]))
+end
+end
+
+class TestPairTargets < Test::Unit::TestCase
+def test_pairtargets
+  line = [da(3, 4), v(), v(), d(4), e(), a(4), v(), v()]
+  result = pairTargetsWithValues(line)
+  print "pair "
+  println result;
+  assert_equal(2, result.length);
+  assert(cellEquals(da(3, 4), result[0][0][0]))
+  assert(cellEquals(d(4), result[1][0][0]))
+  assert(cellEquals(e(), result[1][0][1]))
+  assert(cellEquals(a(4), result[1][0][2]))
+end
+end
+
