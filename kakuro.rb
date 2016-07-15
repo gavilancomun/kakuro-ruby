@@ -243,3 +243,9 @@ def solvePair(f, pair)
   end 
 end
 
+def solveLine(line, pairSolver)
+  pairTargetsWithValues(line)
+    .map {|pair| pairSolver.(pair)}
+    .flatten(1)
+end
+

@@ -161,4 +161,17 @@ def test_solvepair
 end
 end
 
+class TestSolveLine < Test::Unit::TestCase
+def test_solveline
+  line = [da(3, 4), v(), v(), d(4), e(), a(5), v(), v()]
+  result = solveLine(line, ->(v) {solvePair(->(x) { x.across }, v)})
+  print "solve line "
+  println result
+  assert_equal(8, result.length)
+  assert(cellEquals(v(1, 3), result[1]))
+  assert(cellEquals(v(1, 3), result[2]))
+  assert(cellEquals(v(1, 2, 3, 4), result[6]))
+  assert(cellEquals(v(1, 2, 3, 4), result[7]))
+end
+end
 
