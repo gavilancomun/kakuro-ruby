@@ -147,3 +147,18 @@ def test_pairtargets
 end
 end
 
+class TestSolvePair < Test::Unit::TestCase
+def test_solvepair
+  line = [da(3, 4), v(), v(), d(4), e(), a(4), v(), v()]
+  pairs = pairTargetsWithValues(line)
+  pair = pairs[0]
+  result = solvePair(->(cell) { cell.down }, pair)
+  print "solvePair "
+  println result
+  assert_equal(3, result.length)
+  assert(cellEquals(v(1, 2), result[1]))
+  assert(cellEquals(v(1, 2), result[2]))
+end
+end
+
+

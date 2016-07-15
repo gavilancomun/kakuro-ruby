@@ -232,3 +232,14 @@ def pairTargetsWithValues(line)
   partitionN(2, gatherValues(line))
 end
 
+def solvePair(f, pair)
+  notValueCells = pair[0]
+  if ((nil == pair[1]) || (0 == pair[1].length))
+    notValueCells
+  else
+    valueCells = pair[1]
+    newValueCells = solveStep(valueCells, f.(last(notValueCells)))
+    concatLists(notValueCells, newValueCells)
+  end 
+end
+
