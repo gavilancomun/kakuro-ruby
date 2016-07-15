@@ -24,7 +24,7 @@ class DownAcrossCell
   end
 
   def draw
-    "   " + sprintf("%02d", @down) + "\\" + sprintf("%02d", @across) + "  "
+    "   " + sprintf("%2d", @down) + "\\" + sprintf("%2d", @across) + "  "
   end
 end
 
@@ -50,7 +50,7 @@ class AcrossCell
   end
 
   def draw
-    "   --\\" + sprintf("%02d", @across) + "  "
+    "   --\\" + sprintf("%2d", @across) + "  "
   end
 end
 
@@ -76,7 +76,7 @@ class DownCell
   end
 
   def draw
-    "   " + sprintf("%02d", @down) + "\\--  "
+    "   " + sprintf("%2d", @down) + "\\--  "
   end
 end
 
