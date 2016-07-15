@@ -123,9 +123,9 @@ end
 
 def v (*arguments)
   if (0 == arguments.length)
-    return ValueCell.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    ValueCell.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
   else
-    return ValueCell.new(arguments)
+    ValueCell.new(arguments)
   end
 end
 
@@ -160,7 +160,7 @@ end
 
 def transpose(m)
   if (0 == m.length)
-    return []
+    []
   else
     (0 .. (m[0].length - 1)).map {|i| m.map {|col| col[i]} }
   end
@@ -168,5 +168,28 @@ end
 
 def concatLists(coll1, coll2)
   coll1.dup.concat(coll2)
+end
+
+def partitionBy(f, coll)
+  if (0 === coll.length)
+    []
+  else
+    head = coll[0]
+    fx = f.(head)
+    group = coll.take_while {|y| fx == f.(y) }
+    concatLists([group], partitionBy(f, coll.drop(group.length)))
+  end
+end
+
+def partitionAll(n, step, coll)
+  if (0 == coll.length)
+    []
+  else
+    concatLists([coll.take(n)], partitionAll(n, step, coll.drop(step)))
+  end
+end
+
+def partitionN (n, coll)
+  partitionAll(n, n, coll)
 end
 

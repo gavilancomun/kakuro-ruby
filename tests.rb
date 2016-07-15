@@ -76,3 +76,30 @@ class TestTake < Test::Unit::TestCase
   end
 end
 
+class TestPartBy < Test::Unit::TestCase
+  def test_partby
+  data = [1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9]
+  result = partitionBy(->(n) {0 == (n % 2)}, data)
+  println result
+  assert_equal(9, result.length)
+  end
+end
+
+class TestPartAll < Test::Unit::TestCase
+  def test_partall
+  data = [1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9]
+  result = partitionAll(5, 3, data)
+  println result
+  assert_equal(5, result.length)
+  end
+end
+
+class TestPartN < Test::Unit::TestCase
+  def test_partn
+  data = [1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9]
+  result = partitionN(5, data)
+  println result
+  assert_equal(3, result.length)
+  end
+end
+
