@@ -86,7 +86,7 @@ class ValueCell
   attr_accessor :values
 
   def initialize(values)
-    @values = values
+    @values = Set.new(values).to_a
   end
 
   def draw
@@ -145,6 +145,10 @@ end
 
 def drawRow(row)
   row.map {|v| v.draw}.join + "\n";
+end
+
+def drawGrid(grid)
+  grid.map {|row| drawRow(row)}.join() + "\n"
 end
 
 def conj(coll, item)
@@ -247,5 +251,44 @@ def solveLine(line, pairSolver)
   pairTargetsWithValues(line)
     .map {|pair| pairSolver.(pair)}
     .flatten(1)
+end
+
+def solveRow(row)
+  solveLine(row, ->(v) { solvePair(->(x) { x.across }, v) })
+end
+
+def solveColumn(column)
+  solveLine(column, ->(v) { solvePair(->(x) { x.down }, v) })
+end
+
+def solveGrid(grid)
+  rowsDone = grid.map {|r| solveRow(r)}
+  colsDone = transpose(rowsDone)
+    .map {|col| solveColumn(col) }
+  transpose(colsDone)
+end
+
+def gridEquals(g1, g2)
+  if (g1.length == g2.length)
+    (0 .. (g1.length - 1)).map {|i|
+      (0 .. (g1[i].length - 1)).map {|j|
+        if (!g1[i][j].equals(g2[i][j]))
+          return false;
+        end 
+      }}
+    true
+  else
+    false
+  end
+end
+
+def solver(grid)
+  print drawGrid(grid)
+  g = solveGrid(grid)
+  if (gridEquals(g, grid))
+    g
+  else
+    solver(g)
+  end
 end
 
