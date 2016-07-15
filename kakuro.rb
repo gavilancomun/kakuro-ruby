@@ -169,3 +169,7 @@ def transpose(m)
   end
 end
 
+def concatLists(coll1, coll2)
+  coll1.dup.concat(coll2)
+end
+

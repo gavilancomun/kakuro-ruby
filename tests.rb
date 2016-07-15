@@ -40,4 +40,39 @@ class TestTranspose < Test::Unit::TestCase
   end
 end
 
+class TestTakeWhile < Test::Unit::TestCase
+  def test_takewhile
+  result = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].take_while {|n| n < 4}
+  println result
+  assert_equal(4, result.length)
+  end
+end
+
+class TestConcat < Test::Unit::TestCase
+  def test_concat
+  a = [1, 2, 3]
+  b = [4, 5, 6, 1, 2, 3]
+  result = concatLists(a, b)
+  println result 
+  assert_equal(9, result.length)
+  end
+end
+
+class TestDrop < Test::Unit::TestCase
+  def test_drop
+  a = [1, 2, 3, 4, 5, 6]
+  result = a.drop(4)
+  println result
+  assert_equal(2, result.length)
+  end
+end
+
+class TestTake < Test::Unit::TestCase
+  def test_take
+  a = [1, 2, 3, 4, 5, 6]
+  result = a.take(4)
+  println result
+  assert_equal(4, result.length)
+  end
+end
 
