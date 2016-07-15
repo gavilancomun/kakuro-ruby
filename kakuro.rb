@@ -162,10 +162,7 @@ def transpose(m)
   if (0 == m.length)
     return []
   else
-    (0 .. (m[0].length - 1)).map {|i|
-      row = []
-      m.map {|col| row.push(col[i])}
-      row }
+    (0 .. (m[0].length - 1)).map {|i| m.map {|col| col[i]} }
   end
 end
 
