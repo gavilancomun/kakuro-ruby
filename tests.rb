@@ -13,3 +13,15 @@ class TestDrawRow < Test::Unit::TestCase
  
 end
 
+class TestPermute < Test::Unit::TestCase
+  def test_permute
+    vs = [v(), v(), v()]
+    results = permuteAll(vs, 6)
+    print results
+    assert_equal(10, results.length)
+    diff = results.find_all {|p| allDifferent(p)}
+    assert_equal(6, diff.length);
+  end
+end
+
+

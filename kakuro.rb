@@ -1,5 +1,7 @@
 # kakuro solver
 
+require 'set'
+
 class DownAcrossCell 
   attr_accessor :down
   attr_accessor :across
@@ -129,5 +131,30 @@ end
 
 def drawRow(row)
   row.map {|v| v.draw}.join + "\n";
+end
+
+def conj(coll, item)
+  coll.dup.push(item)
+end
+
+def allDifferent(arr)
+  arr.length == Set.new(arr).size
+end
+
+def permute(vs, target, soFar)
+  if (target >= 1)
+    if (soFar.length == (vs.length - 1))
+      [conj(soFar, target)]
+    else
+      arrays = vs[soFar.length].values.map {|n| permute(vs, (target - n), conj(soFar, n))}
+      arrays.flatten(1)
+    end
+  else
+    []
+  end
+end
+
+def permuteAll(vs, target)
+  permute(vs, target, [])
 end
 
