@@ -108,7 +108,6 @@ class TestPartN < Test::Unit::TestCase
 end
 
 class TestSolveStep < Test::Unit::TestCase
-
 def test_solvestep
   result = solveStep([v(1, 2), v()], 5)
   print "solve step result "
@@ -117,7 +116,6 @@ def test_solvestep
   assert(cellEquals(v(3, 4), result[1]))
 end
 end
-
 
 class TestGatherValues < Test::Unit::TestCase
 def test_gather
