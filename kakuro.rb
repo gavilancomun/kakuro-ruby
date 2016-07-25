@@ -249,16 +249,16 @@ end
 
 def solveLine(line, pairSolver)
   pairTargetsWithValues(line)
-    .map {|pair| pairSolver.(pair)}
+    .map {|pair| solvePair(pairSolver, pair)}
     .flatten(1)
 end
 
 def solveRow(row)
-  solveLine(row, ->(v) { solvePair(->(x) { x.across }, v) })
+  solveLine(row, ->(x) { x.across })
 end
 
 def solveColumn(column)
-  solveLine(column, ->(v) { solvePair(->(x) { x.down }, v) })
+  solveLine(column, ->(x) { x.down })
 end
 
 def solveGrid(grid)

@@ -162,7 +162,7 @@ end
 class TestSolveLine < Test::Unit::TestCase
 def test_solveline
   line = [da(3, 4), v(), v(), d(4), e(), a(5), v(), v()]
-  result = solveLine(line, ->(v) {solvePair(->(x) { x.across }, v)})
+  result = solveLine(line, ->(x) { x.across })
   print "solve line "
   println result
   assert_equal(8, result.length)
